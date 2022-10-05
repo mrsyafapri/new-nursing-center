@@ -1,14 +1,14 @@
 from django.conf import settings
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import User
+from django.views.generic import TemplateView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.authentication import SessionAuthentication
 
 from users.models import User
-from chat.serializers import MessageModelSerializer, UserModelSerializer
+from chat.serializers import MessageModelSerializer
 from chat.models import Message
 
 
@@ -50,12 +50,16 @@ class MessageModelViewSet(ModelViewSet):
         return Response(serializer.data)
 
 
-class UserModelViewSet(ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserModelSerializer
-    allowed_methods = ("GET", "HEAD", "OPTIONS")
-    pagination_class = None
+class ChatView(TemplateView):
+    template_name = "chat/index.html"
 
-    def list(self, request, *args, **kwargs):
-        self.queryset = self.queryset.exclude(id=request.user.id)
-        return super(UserModelViewSet, self).list(request, *args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(ChatView, self).get_context_data(**kwargs)
+        context["is_doctor"] = self.request.user.is_doctor
+        context["patients"] = User.objects.filter(
+            is_doctor=False, is_superuser=False
+        ).exclude(id=self.request.user.id)
+        context["doctors"] = User.objects.filter(
+            is_doctor=True, is_superuser=False
+        ).exclude(id=self.request.user.id)
+        return context

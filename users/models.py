@@ -7,6 +7,7 @@ class User(AbstractUser):
     address = models.CharField(max_length=255, blank=True, null=True)
     id_card = models.CharField(max_length=16, blank=True, null=True)
     avatar = models.ImageField(upload_to="users", blank=True, null=True)
+    is_doctor = models.BooleanField(default=False)
 
 
 class Doctor(models.Model):
@@ -15,6 +16,3 @@ class Doctor(models.Model):
     bio = models.TextField(blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
     price = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.user.username

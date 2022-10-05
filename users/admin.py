@@ -27,6 +27,7 @@ class UserAdminConfig(UserAdmin):
                     "address",
                     "id_card",
                     "avatar",
+                    "is_doctor",
                 )
             },
         ),
@@ -66,6 +67,7 @@ class UserAdminConfig(UserAdmin):
                     "address",
                     "id_card",
                     "avatar",
+                    "is_doctor",
                     "password1",
                     "password2",
                 ),

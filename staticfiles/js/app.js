@@ -5,18 +5,11 @@ let userList = $('#user-list');
 let messageList = $('#messages');
 
 function updateUserList() {
-    $.getJSON('api/v1/user/', function (data) {
-        userList.children('.user').remove();
-        for (let i = 0; i < data.length; i++) {
-            const userItem = `<a class="list-group-item user">${data[i]['username']}</a>`;
-            $(userItem).appendTo('#user-list');
-        }
-        $('.user').click(function () {
-            userList.children('.active').removeClass('active');
-            let selected = event.target;
-            $(selected).addClass('active');
-            setCurrentRecipient(selected.text);
-        });
+    $('.user').click(function () {
+        userList.children('.active').removeClass('active');
+        let selected = event.target;
+        $(selected).addClass('active');
+        setCurrentRecipient(selected.text);
     });
 }
 
