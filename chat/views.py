@@ -9,7 +9,7 @@ from rest_framework.authentication import SessionAuthentication
 
 from users.models import User
 from chat.serializers import MessageModelSerializer, UserModelSerializer
-from chat.models import MessageModel
+from chat.models import Message
 
 
 class CsrfExemptSessionAuthentication(SessionAuthentication):
@@ -22,7 +22,7 @@ class MessagePagination(PageNumberPagination):
 
 
 class MessageModelViewSet(ModelViewSet):
-    queryset = MessageModel.objects.all()
+    queryset = Message.objects.all()
     serializer_class = MessageModelSerializer
     allowed_methods = ("GET", "POST", "HEAD", "OPTIONS")
     authentication_classes = (CsrfExemptSessionAuthentication,)

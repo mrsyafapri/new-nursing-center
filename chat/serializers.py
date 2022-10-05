@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.serializers import ModelSerializer, CharField
 
-from chat.models import MessageModel
+from chat.models import Message
 from users.models import User
 
 
@@ -14,12 +14,12 @@ class MessageModelSerializer(ModelSerializer):
         recipient = get_object_or_404(
             User, username=validated_data["recipient"]["username"]
         )
-        msg = MessageModel(recipient=recipient, body=validated_data["body"], user=user)
+        msg = Message(recipient=recipient, body=validated_data["body"], user=user)
         msg.save()
         return msg
 
     class Meta:
-        model = MessageModel
+        model = Message
         fields = ("id", "user", "recipient", "timestamp", "body")
 
 

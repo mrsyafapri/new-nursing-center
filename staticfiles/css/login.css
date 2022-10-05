@@ -4,8 +4,8 @@ body {
 }
 
 .form-signin {
-    max-width: 330px;
-    margin: 0 auto;
+    max-width: 350px;
+    margin: auto;
     padding: 30px 15px;
 }
 
@@ -31,4 +31,3 @@ body {
 .form-signin .form-control:focus {
     z-index: 2;
 }
-

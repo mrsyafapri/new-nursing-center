@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from users.models import User
+from users.models import User, Doctor
 
 
 class UserAdminConfig(UserAdmin):
@@ -75,3 +75,4 @@ class UserAdminConfig(UserAdmin):
 
 
 admin.site.register(User, UserAdminConfig)
+admin.site.register(Doctor)

@@ -4,25 +4,19 @@ from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 
 
-class MessageModel(models.Model):
+class Message(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        verbose_name="user",
         related_name="from_user",
-        db_index=True,
     )
     recipient = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        verbose_name="recipient",
         related_name="to_user",
-        db_index=True,
     )
-    timestamp = models.DateTimeField(
-        "timestamp", auto_now_add=True, editable=False, db_index=True
-    )
-    body = models.TextField("body")
+    timestamp = models.DateTimeField(auto_now_add=True, editable=False)
+    body = models.TextField()
 
     def __str__(self):
         return str(self.id)
@@ -43,13 +37,10 @@ class MessageModel(models.Model):
 
     def save(self, *args, **kwargs):
         new = self.id
-        self.body = self.body.strip()  # Trimming whitespaces from the body
-        super(MessageModel, self).save(*args, **kwargs)
+        self.body = self.body.strip()
+        super(Message, self).save(*args, **kwargs)
         if new is None:
             self.notify_ws_clients()
 
     class Meta:
-        app_label = "chat"
-        verbose_name = "message"
-        verbose_name_plural = "messages"
         ordering = ("-timestamp",)

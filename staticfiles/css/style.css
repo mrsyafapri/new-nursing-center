@@ -5,7 +5,7 @@
 .messages {
     position: relative;
     padding: 10px 10px 0 10px;
-    margin: 0 0 0 0;
+    margin: 0;
     height: 500px;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -14,7 +14,7 @@
 .messages .message {
     clear: both;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .messages .message.left .avatar {
@@ -24,10 +24,11 @@
 
 .messages .message.left .text_wrapper {
     background-color: #ffe6cb;
-    margin-left: 20px;
+    margin-left: 16px;
 }
 
-.messages .message.left .text_wrapper::after, .messages .message.left .text_wrapper::before {
+.messages .message.left .text_wrapper::after,
+.messages .message.left .text_wrapper::before {
     right: 100%;
     border-right-color: #ffe6cb;
 }
@@ -43,11 +44,12 @@
 
 .messages .message.right .text_wrapper {
     background-color: #c7eafc;
-    margin-right: 20px;
+    margin-right: 16px;
     float: right;
 }
 
-.messages .message.right .text_wrapper::after, .messages .message.right .text_wrapper::before {
+.messages .message.right .text_wrapper::after,
+.messages .message.right .text_wrapper::before {
     left: 100%;
     border-left-color: #c7eafc;
 }
@@ -68,14 +70,15 @@
 
 .messages .message .text_wrapper {
     display: inline-block;
-    padding: 20px;
+    padding: 18px;
     border-radius: 6px;
     width: calc(100% - 85px);
     min-width: 100px;
     position: relative;
 }
 
-.messages .message .text_wrapper::after, .messages .message .text_wrapper:before {
+.messages .message .text_wrapper::after,
+.messages .message .text_wrapper:before {
     top: 18px;
     border: solid transparent;
     content: " ";

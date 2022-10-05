@@ -23,13 +23,14 @@ function updateUserList() {
 function drawMessage(message) {
     let position = 'left';
     const date = new Date(message.timestamp);
+    const time = date.getHours() + ':' + date.getMinutes() + ' &bullet; ' + date.toDateString();
     if (message.user === currentUser) position = 'right';
     const messageItem = `
             <li class="message ${position}">
                 <div class="avatar">${message.user}</div>
                 <div class="text_wrapper">
-                    <div class="text">${message.body}<br>
-                        <span class="small">${date}</span>
+                    <div class="text text-dark fw-bold">${message.body}<br>
+                        <span class="text-muted fs-6">${time}</span>
                     </div>
                 </div>
             </li>`;
@@ -44,7 +45,6 @@ function getConversation(recipient) {
         }
         messageList.animate({ scrollTop: messageList.prop('scrollHeight') });
     });
-
 }
 
 function getMessageById(message) {

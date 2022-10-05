@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css" />
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <form class="form-signin" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% csrf_token %}
+        <h2 class="form-signin-heading">Sign up form user</h2>
+        {% if form.errors %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <div>{{form.errors}}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                    <input name="{{form.first_name.name}}" type="{{form.first_name.widget_type}}"
+                        id="{{form.first_name.id_for_label}}" class="form-control" required />
+                    <label class="form-label" for="{{form.first_name.id_for_label}}">{{form.first_name.label}}</label>
+                    <small class="form-text text-muted">
+                        <span class="text-danger">*</span>
+                        <span>{{form.first_name.help_text}}</span>
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                    <input name="{{form.last_name.name}}" type="{{form.last_name.widget_type}}"
+                        id="{{form.last_name.id_for_label}}" class="form-control" required />
+                    <label class="form-label" for="{{form.last_name.id_for_label}}">{{form.last_name.label}}</label>
+                    <small class="form-text text-muted">
+                        <span class="text-danger">*</span>
+                        <span>{{form.last_name.help_text}}</span>
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input name="{{form.email.name}}" type="{{form.email.widget_type}}" id="{{form.email.id_for_label}}"
+                class="form-control" required />
+            <label class="form-label" for="{{form.email.id_for_label}}">{{form.email.label}}</label>
+            <small class="form-text text-muted">
+                <span class="text-danger">*</span>
+                <span>{{form.email.help_text}}</span>
+            </small>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input name="{{form.phone_number.name}}" type="{{form.phone_number.widget_type}}"
+                id="{{form.phone_number.id_for_label}}" class="form-control" required />
+            <label class="form-label" for="{{form.phone_number.id_for_label}}">{{form.phone_number.label}}</label>
+            <small class="form-text text-muted">
+                <span class="text-danger">*</span>
+                <span>{{form.phone_number.help_text}}</span>
+            </small>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input name="{{form.avatar.name}}" type="file" id="{{form.avatar.id_for_label}}" class="form-control"
+                accept="image/*" />
+            <label class="form-label" for="{{form.avatar.id_for_label}}">{{form.avatar.label}}</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <textarea name="{{form.address.name}}" type="{{form.address.widget_type}}"
+                id="{{form.address.id_for_label}}" class="form-control" maxlength="200" rows="3"></textarea>
+            <label class="form-label" for="{{form.address.id_for_label}}">{{form.address.label}}</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input name="{{form.id_card.name}}" type="{{form.id_card.widget_type}}" id="{{form.id_card.id_for_label}}"
+                class="form-control" required />
+            <label class="form-label" for="{{form.id_card.id_for_label}}">{{form.id_card.label}}</label>
+            <small class="form-text text-muted">
+                <span class="text-danger">*</span>
+                <span>{{form.id_card.help_text}}</span>
+            </small>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input name="{{form.username.name}}" type="{{form.username.widget_type}}"
+                value="{{ form.username.value|default_if_none:'' }}" id="{{form.username.id_for_label}}"
+                class="form-control" required />
+            <label class="form-label" for="{{form.username.id_for_label}}">{{form.username.label}}</label>
+            <small class="form-text text-muted">
+                <span class="text-danger">*</span>
+                <span>{{form.username.help_text}}</span>
+            </small>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input name="{{form.password1.name}}" type="{{form.password1.widget_type}}"
+                id="{{form.password1.id_for_label}}" class="form-control" required />
+            <label class="form-label" for="{{form.password1.id_for_label}}">{{form.password1.label}}</label>
+            <small class="form-text text-muted">
+                <span class="text-danger">*</span>
+                <span>{{form.password1.help_text}}</span>
+            </small>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input name="{{form.password2.name}}" type="{{form.password2.widget_type}}"
+                id="{{form.password2.id_for_label}}" class="form-control" required />
+            <label class="form-label" for="{{form.password2.id_for_label}}">{{form.password2.label}}</label>
+            <small class="form-text text-muted">
+                <span class="text-danger">*</span>
+                <span>{{form.password2.help_text}}</span>
+            </small>
+        </div>
+
+        <div class="text-center text-lg-start mt-4">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                Sign up
+            </button>
+            <p class="fw-bold mt-2 pt-1 mb-0">Have already an account? <a href="{% url 'login' %}"
+                    class="link-success">Login</a></p>
+        </div>
+    </form>
+</div>
+{% endblock %}

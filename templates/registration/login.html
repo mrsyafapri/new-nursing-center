@@ -26,9 +26,13 @@
         <label for="password" class="sr-only">Password</label>
         <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
         <br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Log In
-        </button>
+        <div class="text-center text-lg-start mt-4">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                Log in
+            </button>
+            <p class="fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="{% url 'signup' %}"
+                    class="link-success">Sign up</a></p>
+        </div>
     </form>
 </div> <!-- /container -->
 {% endblock %}
